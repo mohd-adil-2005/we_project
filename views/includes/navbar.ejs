@@ -8,6 +8,71 @@
 </head>
 <body>
     <style>
+
+
+
+
+/* ✅ Hide original nav links on small screens */
+/* ✅ Hide desktop user links on mobile */
+
+/* ✅ Only show hamburger on small screens */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    display: none !important;
+  }
+
+  .navbar-toggler {
+    position: relative;
+  }
+
+  .mobile-popup-menu {
+    display: none;
+    position: absolute;
+    top: 2.8rem;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    min-width: 160px;
+    flex-direction: column;
+    z-index: 1000;
+  }
+
+  /* ✅ Show menu when hamburger is clicked or focused */
+  .navbar-toggler:focus-within .mobile-popup-menu,
+  .navbar-toggler:hover .mobile-popup-menu {
+    display: flex;
+  }
+
+  .mobile-popup-menu a {
+    display: block;
+    text-decoration: none;
+    font-size: medium!important;
+    font-family: sans-serif;
+    font-weight: 400!important;
+
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+
+  .mobile-popup-menu a:hover {
+    background-color: #f8f9fa;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
       .btn-search{
         background-color: #fe424d;
         width: 10rem;
@@ -35,8 +100,37 @@
     <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler  d-md-none" type="button" data-bs-toggle="collapse"tabindex="0" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
+            
+
+
+<!-- ✅ mobile view ke lie line here to  222 something button end  -->
+
+        <div class="mobile-popup-menu">
+          
+    <% if (!currentUser) { %>
+      <a class="nav-link" href="/listings/new"> <b>Add new listings</b></a>
+      <a class="nav-link "  href="/signup"><b>Signup</b></a>
+      <a class="nav-link" href="/login"><b>Login</b></a>
+      
+    <% }
+       
+    else { %>
+      <a class="nav-link" href="/listings/new"> <b>Add new listings</b></a>
+     <a class="nav-link" href="/logout"> <b>Logout</b></a>
+    <a class="nav-link" href="/booking/my/<%=currentUser._id%>"> <b>Trips</b></a>
+    <% } %>
+    
+  </div>
+</button>
+
+
+
+
+
+
+
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
@@ -59,18 +153,38 @@
       
 
 
-            <div class="navbar-nav ms-auto">
+            <div class="navbar-nav ms-auto user-menu">
               <a class="nav-link" href="/listings/new"> Add new listings</a>
-             <% if(!currentUser){%>
+            <% if(!currentUser){%>
                 <a class="nav-link "  href="/signup"><b>Signup</b></a>
                 <a class="nav-link" href="/login"><b>Login</b></a>
-            <%  }%>
-              <%if(currentUser){%>
+           <%}%>
+           <%if(currentUser){%>
                 <a class="nav-link" href="/logout"> <b>Logout</b></a>
-              <%}%>
+                 <a class="nav-link" href="/booking/my/<%=currentUser._id%>"> <b>Trips</b></a>
+           <%}%>
             
              
             </div>
+
+<!--  mobile profile -->
+<!-- Navbar Toggler (Hamburger Icon) -->
+
+
+<!-- ✅ Hamburger Icon with Popup Menu inside -->
+
+
+  <!-- ✅ Popup menu -->
+
+
+
+
+
+
+
+
+
+
 
 
 

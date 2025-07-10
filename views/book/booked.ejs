@@ -1,0 +1,41 @@
+<% layout("layouts/boilerplate") %>
+<h2 class="text-center mb-5 mt-4 fw-bold text-primary">My Bookings</h2>
+
+<% if (bookings.length === 0) { %>
+  <div class="alert alert alert-danger text-center fs-5">You haven't booked
+     any listings yet.</div>
+     <div class=" s">
+          <a href="/listings" class=" col-6 offset-3 gotohome btn btn-primary mt-3 px-4 text-center align-items-center">
+    ← Back to Home
+  </a>
+  
+     </div>
+    
+<% } else { %>
+  <div class="d-flex flex-column align-items-center gap-4 pb-5">
+    <% bookings.forEach(booking => { %>
+      <div class="card shadow-sm border-0 w-100" style="max-width: 600px;">
+        <div class="card-body">
+          <h6 class="text-muted">Booking ID:</h6>
+          <p class="fw-semibold text-dark"><%= booking._id %></p>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Full Name:</strong> <%= booking.fullname %></li>
+            <li class="list-group-item"><strong>Room Type:</strong> <%= booking.room %></li>
+            <li class="list-group-item"><strong>Guests:</strong> <%= booking.guest %></li>
+            <li class="list-group-item"><strong>Check-In:</strong> <%= booking.checkIn.toDateString() %></li>
+            <li class="list-group-item"><strong>Check-Out:</strong> <%= booking.checkOut.toDateString() %></li>
+            <li class="list-group-item"><strong>Payment Method:</strong> <%= booking.paymentMethod %></li>
+          </ul>
+        </div>
+        <div class="card-footer text-end bg-white border-0">
+          <form action="/booking/my/<%=booking._id %>?_method=DELETE"  method="POST">
+
+<button   class="btn btn-dark offset-5 edit-btn">Cancel Booking</button>
+
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>

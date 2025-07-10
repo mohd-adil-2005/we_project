@@ -35,6 +35,23 @@
         
         </div>
     <%}%>
+
+     <%if(currentUser&&!Listing.owner._id.equals(currentUser._id)){%>
+        <div class="btns">     
+            <a href="/listings/<%=Listing._id %>/bookings"
+            class="btn btn-dark col-1 offset-3 edit-btn">Book</a><br>
+           
+        
+        </div>
+    <%}%>
+
+
+
+
+
+
+
+
    
 
    
@@ -121,13 +138,14 @@ type="radio" id="first-rate5"
    
    
 
-
+  <% if(currentUser&&Listing.owner._id.equals(currentUser._id)){%>
 <form class="mb-3"  method="POST"
  action=
  "/listings/<%=Listing._id%>/reviews/<%=review._id%>?_method=DELETE">
-    <button class="btn btn-sm btn-dark"  >Delete</button>
+          
+            <button class="btn btn-sm btn-dark">Delete</button>
 </form>
- 
+ <%}%>
 </div>
    <%}%>
    <%}%>

@@ -49,6 +49,12 @@ const listingSchema = new Schema({
         enum: ['Trending', 'Rooms', 'Iconic cities', 'Castles', 'Amazing pool', 'Farms','Arctic','Camping', 'Mountains','Domes','Boat'],
        
     },
+    bookings:[
+        {
+            type: Schema.Types.ObjectId,
+            ref:"Book",
+        },
+    ],
 
 
 });

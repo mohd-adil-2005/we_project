@@ -25,14 +25,17 @@ const ejsMate= require("ejs-mate");
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")))
 const listings = require("./routes/listing.js");
+const books = require("./routes/book.js");
 const review = require("./routes/review.js");
 const Userrouter = require("./routes/user.js");
+const bookedUser = require("./routes/bookedUser.js");
 const passport= require("passport");
 const LocalStrategy= require("passport-local").Strategy;
 const User = require("./models/user.js");
+const book = require('./models/book.js');
 app.use(express.json());
 const db_url= process.env.ATLASDB_URL;
-console.log(db_url);
+console.log(" the db url sis that here"+db_url);
 async function main() {
     await mongoose.connect(db_url);
     
@@ -80,7 +83,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error= req.flash("error");
-    res.locals.currentUser= req.user;
+    res.locals.currentUser= req.user||null;
+   
   
 
     console.log(res.locals.deletelisting);
@@ -92,21 +96,13 @@ app.use((req,res,next)=>{
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", review);
 app.use("/",Userrouter);
+app.use("/listings/:id/bookings",books);
+app.use("/booking/my",bookedUser);
 
 
 
 
-// app.get("/",(req,res)=>{
-//     res.send("sever on working major project okay  ")
-// });
-app.get("/userdemo",async(req,res)=>{
-    let fakeuser= new User({
-        email:"mohdadil.tech@gmail.com",
-        username:"adilansar",
-    });
- let registeruser= await User.register(fakeuser, "helloworld");
- res.send(registeruser);
-})
+
 
 
 

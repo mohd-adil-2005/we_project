@@ -93,7 +93,7 @@ module.exports.rendereditForm= async (req,res)=>{
     }
     originalImageUrl= originalImageUrl.replace("/upload", "/upload/c_thumb,g_face,h_200,w_200/e_blur:75/f_auto/");
     res.render("listings/edit.ejs",{Listing, originalImageUrl});
-    console.log("this is url    here "+ originalImageUrl);
+    
 };
 
 
