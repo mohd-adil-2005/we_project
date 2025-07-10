@@ -1,5 +1,2 @@
-# ✅ Node modules - never commit these!
 node_modules/
-
-# ✅ Environment variables - keep secrets safe
 .env
