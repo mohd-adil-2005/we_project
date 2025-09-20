@@ -144,7 +144,9 @@ app.post("/send-category", async (req, res,next) => {
 
 
 
-
+app.get("/", (req, res) => {
+    res.redirect("/listings");   // or res.render("home");
+});
 
 
 
